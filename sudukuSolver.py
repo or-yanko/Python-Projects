@@ -1,6 +1,7 @@
 ###press space to solve the soduku
 ###press f to fill the suduku with my numbers
 ###press c to clear the suduku
+###press b to remove the red numbers
 ###press with the mouse on point and enter the numbers, if its stack it means your input is wrong
 import pygame
 
@@ -9,6 +10,11 @@ WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
+
+def copyB1ToB2(b1, b2):
+    for i in range(0, 9):
+        for j in range(0, 9):
+            b2[i][j] = b1[i][j]
 
 def drawError(screen, width, hight):
     pygame.font.init()
@@ -164,7 +170,9 @@ def main():
 
              #if button is click
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_f:#fill
+                if event.key == pygame.K_b:#clear red
+                    copyB1ToB2(original, board)
+                elif event.key == pygame.K_f:#fill
                     board = [
                         [7, 8, 0, 4, 0, 0, 1, 2, 0],
                         [6, 0, 0, 0, 7, 5, 0, 0, 9],
@@ -253,6 +261,5 @@ def main():
         pygame.display.flip()
     pygame.quit()
     quit()
-
 
 main()
