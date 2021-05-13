@@ -4,6 +4,7 @@
 ###press b to remove the red numbers
 ###press with the mouse on point and enter the numbers, if its stack it means your input is wrong
 import pygame
+import time
 
 # colors
 WHITE = (255, 255, 255)
@@ -86,6 +87,24 @@ def find_empty(bo):
 
 def draw1(bo, orig, screen):
     pygame.font.init()
+    myfont = pygame.font.SysFont('didot.ttc', 40)
+
+    #draw btns
+    ix = 15
+    iy = 0
+    text = myfont.render("Solve", True, BLACK)
+    screen.blit(text, (630 + ix+45 , 50 + iy))
+
+    text = myfont.render("Fill", True, BLACK)
+    screen.blit(text, (630 + ix+50, 190 + iy))
+
+    text = myfont.render("Clear All", True, BLACK)
+    screen.blit(text, (630 + ix+5, 330 + iy))
+
+    text = myfont.render("Clear Red", True, BLACK)
+    screen.blit(text, (630 + ix, 470 + iy))
+
+    #draw game
     myfont = pygame.font.SysFont('didot.ttc', 100)
 
     pygame.draw.line(screen, BLACK, [640, 630], [0, 630], 8)
@@ -138,7 +157,7 @@ def main():
     ]
 
     # constants
-    WINDOW_WIDTH = 634
+    WINDOW_WIDTH = 800
     WINDOW_HEIGHT = 634
 
     # init screen
@@ -154,6 +173,7 @@ def main():
     pygame.display.flip()
 
     finish = False
+    flag = False
 
     while not finish:
         screen.fill(WHITE)  # fill in white (default)
@@ -164,11 +184,68 @@ def main():
             #if mouse was clicked
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:  # left click
-                    clickX, clickY = pygame.mouse.get_pos()
-                    clickX = clickX // 70
-                    clickY = clickY // 70
+                    x, y = pygame.mouse.get_pos()
+                    if 0 < x and x < 630 and 0 < x and x < 630:
+                        clickX, clickY = x, y
+                        clickX = clickX // 70
+                        clickY = clickY // 70
+                    elif y > 50 and y < 150:#solve
+                        try:
+                            if solve(board) == false:
+                                drawError(screen, WINDOW_WIDTH, WINDOW_HEIGHT)
+                                flag = True
 
-             #if button is click
+                        except:
+                            pass
+                    elif y > 190 and y < 290:#fill
+                        board = [
+                            [7, 8, 0, 4, 0, 0, 1, 2, 0],
+                            [6, 0, 0, 0, 7, 5, 0, 0, 9],
+                            [0, 0, 0, 6, 0, 1, 0, 7, 8],
+                            [0, 0, 7, 0, 4, 0, 2, 6, 0],
+                            [0, 0, 1, 0, 5, 0, 9, 3, 0],
+                            [9, 0, 4, 0, 6, 0, 0, 0, 5],
+                            [0, 7, 0, 3, 0, 0, 0, 1, 2],
+                            [1, 2, 0, 0, 0, 7, 4, 0, 0],
+                            [0, 4, 9, 2, 0, 6, 0, 0, 7]
+                        ]
+                        original = [
+                            [7, 8, 0, 4, 0, 0, 1, 2, 0],
+                            [6, 0, 0, 0, 7, 5, 0, 0, 9],
+                            [0, 0, 0, 6, 0, 1, 0, 7, 8],
+                            [0, 0, 7, 0, 4, 0, 2, 6, 0],
+                            [0, 0, 1, 0, 5, 0, 9, 3, 0],
+                            [9, 0, 4, 0, 6, 0, 0, 0, 5],
+                            [0, 7, 0, 3, 0, 0, 0, 1, 2],
+                            [1, 2, 0, 0, 0, 7, 4, 0, 0],
+                            [0, 4, 9, 2, 0, 6, 0, 0, 7]
+                        ]
+                    elif y > 330 and y < 430:#clear all
+                        board = [
+                            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                            [0, 0, 0, 0, 0, 0, 0, 0, 0]
+                        ]
+                        original = [
+                            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                            [0, 0, 0, 0, 0, 0, 0, 0, 0]
+                        ]
+                    elif y > 470 and y < 570:#clear red
+                        copyB1ToB2(original, board)
+            #if button is click
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_b:#clear red
                     copyB1ToB2(original, board)
@@ -222,6 +299,7 @@ def main():
                     try:
                         if solve(board) == false:
                             drawError(screen, WINDOW_WIDTH, WINDOW_HEIGHT)
+                            flag = True
                     except:
                         pass
                 elif event.key == pygame.K_1:#if 1 clicked
@@ -259,6 +337,10 @@ def main():
 
         draw1(board, original, screen)
         pygame.display.flip()
+        if flag == True:
+            time.sleep(2)
+            flag = False
+
     pygame.quit()
     quit()
 
