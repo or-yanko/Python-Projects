@@ -1,0 +1,18 @@
+run in cmd in C:\Users\gilya\Desktop\Projects\django projects> :
+
+django-admin startproject firstDjangoProject   ////create a new project in that folder
+cd C:\Users\gilya\Desktop\Projects\django projects\firstDjangoProject   ////enter to the projects folder
+python manage.py runserver 6969 ////run the server on my local machine (control+c close the server)
+python manage.py startapp myAppName //// create the app folder with some files
+python manage.py migrate   //// update the site settings or in other words applying the migration
+python manage.py makemigrations myAppName   ////tell django we modified our models
+python manage.py shell   ////open the data shell to add thigs to the database
+python manage.py createsuperuser   ////create new admin user
+	my data for the first web:
+					username: or
+					email: or@mytay.co.il
+					password: 1234
+
+
+
+
