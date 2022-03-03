@@ -3,6 +3,7 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 import joblib
+from sklearn import tree
 
 
 
@@ -29,8 +30,16 @@ elif 'save it'==0:
     model.fit(x,y)
 
     joblib.dump(model, 'music-recommender.joblib')
-else:
+elif 'loadmodel'==0:
     model = joblib.load( 'music-recommender.joblib')
     predictions = model.predict([[21,1]])
     print (predictions)
-
+else:
+    music_data = pd.read_csv('music.csv')
+    model = joblib.load( 'music-recommender.joblib')
+    tree.export_graphviz(model, out_file='mosic-reccomender.dot',
+    feature_names=['age','gender'],
+    class_names=sorted(music_data['genre'].unique()),
+    label='all',
+    rounded=True,
+    filled=True)
