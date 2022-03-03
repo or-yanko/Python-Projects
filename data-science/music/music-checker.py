@@ -2,11 +2,11 @@ import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
-from sklearn.externals import joblib
+import joblib
 
 
 
-if 1==0:
+if 1 == 0:
     music_data = pd.read_csv('music.csv')
     x =  music_data.drop(columns='genre')
     y = music_data['genre']
@@ -20,7 +20,7 @@ if 1==0:
 
     print(scores)
 
-else:
+elif 'save it'==0:
     music_data = pd.read_csv('music.csv')
     x =  music_data.drop(columns='genre')
     y = music_data['genre']
@@ -29,3 +29,8 @@ else:
     model.fit(x,y)
 
     joblib.dump(model, 'music-recommender.joblib')
+else:
+    model = joblib.load( 'music-recommender.joblib')
+    predictions = model.predict([[21,1]])
+    print (predictions)
+
