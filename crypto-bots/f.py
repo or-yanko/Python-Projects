@@ -1,11 +1,7 @@
-import os.path
-from os import path
+s1 = "Hello World"
+s2 = ""
+j = 0
 
-def main():
-
-   print ("File exists:"+str(path.exists('coins.txt')))
-   print ("File exists:" , path.exists('coins-logs/bitcoin-logs.txt'))
-   print ("directory exists:" + str(path.exists('myDirectory')))
-
-if __name__== "__main__":
-   main()
+for i in range(len(s1)):
+    s2[j] = s1[i]
+    j = j + 1
