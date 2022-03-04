@@ -1,2 +1,4 @@
 bitcoin
 cardano
+ethereum
+dogecoin

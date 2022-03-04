@@ -70,9 +70,9 @@ def check_coins():
                 print(colored(str(crypto + ' has\'nt changed yet...'),'yellow'))
             i+=1
         time.sleep(10)
-    except RuntimeError:
-        print(colored(str(crypto+' is wrong coin name... '), 'red'))
-        return False
+    except :
+        print(colored(str('somthing wrong with '+crypto), 'red'))
+        #return False
     return True
 
 def main():
