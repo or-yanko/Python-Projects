@@ -8,6 +8,8 @@ import requests
 import time
 from datetime import datetime
 from termcolor import colored
+import os.path
+from os import path as ospath
 
 path = 'coins-logs/'
 
@@ -27,48 +29,61 @@ def get_crypto_price(coin):
     #Return the text 
     return text
 
-def check_coin(crypto):
-    last_price = '0'
-
-    while True:
-        try:
+def check_coins():
+    try:
+        coins_file = open("coins.txt", "r")
+        coinsList = coins_file.read()
+        coins = coinsList.split('\n')
+        coins_file.close()
+        i = 0
+        last_price = []
+        for a in range(0, len(coins)):
+            last_price.append(0)
+        
+        for crypto in coins:
             price = get_crypto_price(crypto)
-            onlyprice = price.split(' ')[0]
-            if onlyprice != last_price:
+            onlyprice = price.split(' ')[0].replace(',','')
+            
+            p = str(path + crypto + "-logs.txt")
+
+            if ospath.exists(p) == True:
+                    with open(p, "r") as lastfile:
+                        s = lastfile.read().split('\n')[-2]
+                        #print(s)
+                        last_price[i] = s.split(' ')[0]
+
+
+            if onlyprice != last_price[i]:
                 now = datetime.now()
-                '''
-                if float(last_price.replace(',',''))<float(onlyprice.replace(',','')):
+                #print(last_price, onlyprice)
+                if float(last_price[i])<float(onlyprice):
                     print(crypto+' price:',colored(onlyprice, 'green'), 'ILS at', now.strftime("%d/%m/%Y %H:%M:%S")) 
-                elif onlyprice < last_price:
+                elif float(last_price[i])>float(onlyprice):
                     print(crypto+' price:',colored(onlyprice, 'red'), 'ILS at', now.strftime("%d/%m/%Y %H:%M:%S")) 
                 else:
                     print(crypto+' price:',onlyprice, 'ILS at', now.strftime("%d/%m/%Y %H:%M:%S")) 
-                    '''
                 last_price = onlyprice
                 with open(str(path + crypto + "-logs.txt"), "a") as text_file:
                     text_file.write( onlyprice + " " + now.strftime("%d/%m/%Y %H:%M:%S") + "\n")
                     text_file.close()
-            #else:
-             #   print(colored(str(crypto + ' hasn\'t changed yet'), 'yellow'))
-            time.sleep(10)
-        except :
-            print(colored(str(crypto+' is wrong coin name... '), 'red'))
-            break
+            else:
+                print(colored(str(crypto + ' has\'nt changed yet...'),'yellow'))
+            i+=1
+        time.sleep(10)
+    except RuntimeError:
+        print(colored(str(crypto+' is wrong coin name... '), 'red'))
+        return False
+    return True
 
 def main():
+    round1 = 0
 
-    
+    while check_coins() == True:
+        round1+=1
+        print(colored(str('----- round '+str(round1)+' completed successfully ------\n\n'), 'green'))
 
 
 
-
-    '''
-    crypto = ' '
-    crypto = input('enter crypto coin to see his live price: ')
-    if crypto.lower()  in ['exit','quit','bye','pipi']:
-        print(colored('bye bye... :-(', 'red'))
-    check_coin(crypto)
-    '''
 
     '''
     processes = []

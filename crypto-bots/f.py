@@ -1,35 +1,11 @@
-import multiprocessing
+import os.path
+from os import path
 
-import random
+def main():
 
-import time
+   print ("File exists:"+str(path.exists('coins.txt')))
+   print ("File exists:" , path.exists('coins-logs/bitcoin-logs.txt'))
+   print ("directory exists:" + str(path.exists('myDirectory')))
 
-def worker(name: str) -> None:
-
-    print(f'Started worker {name}')
-
-    worker_time = random.choice(range(1, 5))
-
-    time.sleep(worker_time)
-
-    print(f'{name} worker finished in {worker_time} seconds')
-
-if __name__ == '__main__':
-
-    processes = []
-
-    for i in range(5):
-
-        process = multiprocessing.Process(target=worker, 
-
-                                          args=(f'computer_{i}',))
-
-        processes.append(process)
-
-        process.start()
-
-        
-
-    for proc in processes:
-
-        proc.join()
+if __name__== "__main__":
+   main()
