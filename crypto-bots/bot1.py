@@ -1,5 +1,6 @@
 '''
----------------------show coin live prices----------------------
+---------------------- update a folder with all the ----------------------
+--------------------- changes of any coin in the list --------------------
 '''
 import multiprocessing
 import pandas as pd
@@ -41,7 +42,9 @@ def check_coins():
             last_price.append(0)
         
         for crypto in coins:
+            price = ''
             price = get_crypto_price(crypto)
+
             onlyprice = price.split(' ')[0].replace(',','')
             
             p = str(path + crypto + "-logs.txt")
@@ -49,7 +52,6 @@ def check_coins():
             if ospath.exists(p) == True:
                     with open(p, "r") as lastfile:
                         s = lastfile.read().split('\n')[-2]
-                        #print(s)
                         last_price[i] = s.split(' ')[0]
 
 
@@ -72,7 +74,6 @@ def check_coins():
         time.sleep(10)
     except :
         print(colored(str('somthing wrong with '+crypto), 'red'))
-        #return False
     return True
 
 def main():

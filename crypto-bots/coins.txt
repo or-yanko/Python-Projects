@@ -2,3 +2,7 @@ bitcoin
 cardano
 ethereum
 dogecoin
+Binance Coin
+Litecoin
+tron
+Tether
