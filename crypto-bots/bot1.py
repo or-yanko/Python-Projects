@@ -48,8 +48,8 @@ def check_coin(crypto):
                 with open(str(path + crypto + "-logs.txt"), "a") as text_file:
                     text_file.write( onlyprice + " " + now.strftime("%d/%m/%Y %H:%M:%S") + "\n")
                     text_file.close()
-            else:
-                print(colored(str(crypto + ' hasn\'t changed yet'), 'yellow'))
+            #else:
+             #   print(colored(str(crypto + ' hasn\'t changed yet'), 'yellow'))
             time.sleep(10)
         except :
             print(colored(str(crypto+' is wrong coin name... '), 'red'))
@@ -57,11 +57,18 @@ def check_coin(crypto):
 
 def main():
 
+    
+
+
+
+
+    '''
     crypto = ' '
     crypto = input('enter crypto coin to see his live price: ')
     if crypto.lower()  in ['exit','quit','bye','pipi']:
         print(colored('bye bye... :-(', 'red'))
     check_coin(crypto)
+    '''
 
     '''
     processes = []
