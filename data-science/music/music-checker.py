@@ -9,7 +9,7 @@ from sklearn import tree
 
 if 1 == 0:
     music_data = pd.read_csv('music.csv')
-    x =  music_data.drop(columns='genre')
+    x =  music_data.drop(columns=['genre'])
     y = music_data['genre']
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
 
