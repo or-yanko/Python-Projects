@@ -20,5 +20,6 @@ lst = [
 
 for url in lst:
     webbrowser.open(url)
+    print(colored(url+' has been opened successfully !!!\n\n', 'green'))
 
 
