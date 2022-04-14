@@ -1,5 +1,6 @@
-from pytube import YouTube
+import pytube
 from colorama import init, Fore
+
 
 def on_complete(stream, filepath):
 	print('download complete')
@@ -11,7 +12,7 @@ def on_progress(stream, chunk, bytes_remaining):
 
 init()
 link = input('Youtube link: ')
-video_object = YouTube(link, on_complete_callback = on_complete, on_progress_callback = on_progress)
+video_object = pytube.YouTube(link, on_complete_callback = on_complete, on_progress_callback = on_progress)
 
 # information
 print(Fore.RED + f'title:  \033[39m {video_object.title}')
