@@ -26,8 +26,10 @@ print(colored('got all followers','green'))
 
 print(colored('finding who dont follow back...','yellow'))
 dont_follow_back = set(following_list)-set(followers_list)
-os.remove('./prada_followers.txt')
-
+try:
+    os.remove('./prada_followers.txt')
+except:
+    print('almost there...')
 i = 1
 print('\nlist of people that dont follow you back:')
 for f in dont_follow_back:
