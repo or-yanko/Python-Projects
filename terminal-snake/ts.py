@@ -1,7 +1,8 @@
-from pytimedinput import timedInput
 from random import randint
 import os
 from colorama import Fore, init
+from pytimedinput import timedInput
+
 
 def print_field():
 	for cell in CELLS:
