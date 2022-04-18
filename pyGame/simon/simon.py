@@ -102,9 +102,6 @@ def main():
     screen = pygame.display.set_mode(size)
     pygame.display.set_caption("simon")
 
-    clickX = 0
-    clickY = 0
-
     screen.fill(WHITE)  # fill in white
     pygame.display.flip()
     finish = False
