@@ -1,4 +1,9 @@
-from turtle import color
+
+# todo:-----------------------------------------------not finished-------------------------------------------------------------
+# todo:-----------------------------------------------did circuke pics places -------------------------------------------------------------
+# todo:-----------------------------------------------have to do check around, and do the game loop -------------------------------------------------------------
+
+
 import pygame
 import os
 
@@ -32,6 +37,28 @@ class circule():
             screen.blit(RED_DISC_IMG, (self.x, self.y))
 
 
+def draw(screen):
+    pygame.font.init()
+    # draw some things...
+    screen.blit(BOARD_IMG, (0, 100))
+    for a in board:
+        for b in a:
+            b.draw(screen)
+
+
+def check_around():
+    pass
+
+
+def check_winner():
+    for a in range(0, 7):
+        for b in range(0, 6):
+            try:
+                check_around(a, b)
+            except:
+                print(a, end=' ')
+
+
 board = []
 for a in range(0, 7):
     l = []
@@ -41,15 +68,6 @@ for a in range(0, 7):
 # constants
 WINDOW_WIDTH = 638
 WINDOW_HEIGHT = 638
-
-
-def draw(screen):
-    pygame.font.init()
-    # draw some things...
-    screen.blit(BOARD_IMG, (0, 100))
-    for a in board:
-        for b in a:
-            b.draw(screen)
 
 
 # init screen
