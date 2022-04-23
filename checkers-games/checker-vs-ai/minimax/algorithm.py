@@ -1,5 +1,6 @@
 from copy import deepcopy
 import pygame
+from sympy import evaluate
 
 RED = (255, 0, 0)
 WHITE = (255, 255, 255)
@@ -10,8 +11,23 @@ def minimax(position,depth,max_player,game):
         return position.evaluate(), position
     if max_player:
         max_eval = float ('-inf')
-        bestMove = None
-        for move in get_all_moves(position,WHITE,game)
+        best_move = None
+        for move in get_all_moves(position,WHITE,game):
+            evaluate = minimax(move,depth-1,False,game)[0]
+            max_eval = max(evaluate,max_eval)
+            if max_eval == evaluate:
+                best_move = move
+        return max_eval, best_move
+    else:
+        min_eval = float ('inf')
+        best_move = None
+        for move in get_all_moves(position,RED,game):
+            evaluate = minimax(move,depth-1,True,game)[0]
+            min_eval = min(evaluate,min_eval)
+            if min_eval == evaluate:
+                best_move = move
+        return min_eval, best_move
+
 
 
 def simulate_move(piece,move, board,game,skip ):
@@ -27,6 +43,7 @@ def get_all_moves(board,color,game):
         valid_moves = board.get_all_moves(piece)
         for move, skip in valid_moves.items():
             temp_board = deepcopy(board)
-            new_board = simulate_move(piece,move,temp_board,game,skip )
+            temp_piece = temp_board.get_piece(piece.row,piece.col)
+            new_board = simulate_move(temp_piece,move,temp_board,game,skip )
             moves.append(new_board)
     return moves
