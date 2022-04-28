@@ -36,6 +36,9 @@ def toggle_event(key):
     if key == TOGGLE_KEY:
         global clicking
         clicking = not clicking
+    if key == KeyCode(char="e"):
+        exit()
+    
 
 clicking_thread = threading.Thread(target=clicker)
 clicking_thread.start()
