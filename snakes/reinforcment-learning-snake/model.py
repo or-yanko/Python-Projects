@@ -29,6 +29,7 @@ class Linear_QNet(nn.Module):
             model1 = Linear_QNet(11, 256, 3)
             model1.load_state_dict(torch.load(model_folder_path))
             model1.eval()
+            print('loaded model from'+str(os.getcwd())+'/' +model_folder_path + ' seccessfully!!!')
             return model1
         return Linear_QNet(11, 256, 3)
 
