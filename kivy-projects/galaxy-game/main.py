@@ -6,8 +6,8 @@ class MainWidget(Widget):
     pass
 
 
-class TheLabApp(App):
+class GalaxyApp(App):
     pass
 
 
-TheLabApp().run()
+GalaxyApp().run()
