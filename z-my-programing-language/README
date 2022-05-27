@@ -1,8 +1,6 @@
 To activate write: python shell.py
 Inside: ~/z-my-programing-language/
 for help type '?'
-make shure you have the libraries:
-
-1. termcolor
+make shure you have the libraries: termcolor
 
 enjoy
