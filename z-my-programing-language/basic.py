@@ -152,7 +152,9 @@ class Lexer:
         tokens = []
         if self.text == '?':
             return qstiontxt, None, True
-        if self.text.lower() in ['q', 'quit', 'e', 'exit', 'bye']:
+        if self.text in ['', ' ', '  ']:
+            return 'No input...', None, True
+        elif self.text.lower() in ['q', 'quit', 'e', 'exit', 'bye']:
             exit()
 
         while self.current_char != None:
