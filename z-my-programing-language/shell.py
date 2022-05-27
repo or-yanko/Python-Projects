@@ -9,7 +9,7 @@ except:
     os.system("cls")  # Windows
 
 
-HELLO_MSG = """\nHello and welcome to:
+HELLO_MSG = """Hello and welcome to:
 
                 _  .-')                      ('-.         .-') _ .-. .-')                    .-')                
                ( \( -O )                    ( OO ).-.    ( OO ) )\  ( OO )             ,--. ( OO ).              
