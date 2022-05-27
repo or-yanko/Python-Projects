@@ -4,6 +4,7 @@
 # title::######################################################################################
 
 from strings_with_arrows import *
+import os
 
 # title:#######################################################################################
 # title:                                    CONSTANTS
@@ -153,8 +154,12 @@ class Lexer:
         if self.text == '?':
             return qstiontxt, None, True
         if self.text in ['', ' ', '  ']:
-            return 'No input...', None, True
+            return '', None, True
         elif self.text.lower() in ['q', 'quit', 'e', 'exit', 'bye']:
+            try:
+                os.system("clear")  # Linux - OSX
+            except:
+                os.system("cls")  # Windows
             exit()
 
         while self.current_char != None:
