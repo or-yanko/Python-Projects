@@ -24,7 +24,7 @@ HELLO_MSG = """Hello and welcome to:
                         /                                                \\
                        |    _________________________________________     |
                        |   |                                         |    |
-                       |   |  28/5/2022 at 0:4 >>> __                |    |
+                       |   |  28/5/2022 at 0:4 >>> _                 |    |
                        |   |                                         |    |
                        |   |                                         |    |
                        |   |                                         |    |
@@ -69,12 +69,12 @@ HELLO_MSG = """Hello and welcome to:
            `------'   `--' `--'`--'  `--'   `------'   `-----'     `--' `--'  `------'   `------'                       
 
 """
-
-print(colored(HELLO_MSG, 'blue'))
+HELLO_MSG += "\n\n" + basic.qstiontxt
+print(colored(HELLO_MSG, 'cyan', attrs=['bold']))
 while True:
     currentDT = datetime.datetime.now()
     text = input(
-        colored(f'{currentDT.day}/{currentDT.month}/{currentDT.year} at {currentDT.hour}:{currentDT.minute} >>> ', 'blue'))
+        colored(f'{currentDT.day}/{currentDT.month}/{currentDT.year} at {currentDT.hour}:{currentDT.minute} >>> ', 'cyan', attrs=['bold']))
     result, error = basic.run('<stdin>', text)
 
     if error:
