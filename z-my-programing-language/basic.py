@@ -30,8 +30,10 @@ KEYWORDS = [
     'VAR', 'var'
 ]
 qstiontxt = """Help:
-1. you cam calculate math problems like: 1+1 or 2*56 or even 1*7+4^3(34/66.2) with any char and float you want.
-you can write the operators: '+' '-' '*' '/' '^' and use '(' ')'
+1.  you cam calculate math problems like: 1+1 or 2*56 or even 1*7+4^3(34/66.2) with any char and float you want.
+    you can write the operators: '+' '-' '*' '/' '^' and use '(' ')'.
+2.  you can crate varibles with this formula: var <varible name> = <varible value>.
+    for example var a = 34, var div = 23-5.
 """
 
 # title:#######################################################################################
@@ -162,8 +164,6 @@ class Lexer:
 
     def make_tokens(self):
         tokens = []
-        if self.text == '?':
-            return qstiontxt, None, True
         if self.text in ['', ' ', '  ']:
             return '', None
         elif self.text.lower() in ['q', 'quit', 'e', 'exit', 'bye']:
@@ -686,6 +686,8 @@ def run(fn, text):
     # Generate tokens
     if text in ['', ' ']:
         return '', None
+    elif text == '?':
+        return qstiontxt, None
     lexer = Lexer(fn, text)
     tokens, error = lexer.make_tokens()
     if error:
