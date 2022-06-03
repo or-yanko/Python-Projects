@@ -2,6 +2,7 @@ import basic
 from termcolor import colored
 import datetime
 import os
+import d  # ================================================================================================================
 
 try:
     os.system("clear")  # Linux - OSX
@@ -69,16 +70,40 @@ HELLO_MSG = """Hello and welcome to:
            `------'   `--' `--'`--'  `--'   `------'   `-----'     `--' `--'  `------'   `------'                       
 
 """
-HELLO_MSG += "\n\n" + basic.qstiontxt
+qstiontxt = """Help:
+1.  you cam calculate math problems like: 1+1 or 2*56 or even 1*7+4^3(34/66.2) with any char and float you want.
+    you can write the operators: '+' '-' '*' '/' '^' and use '(' ')'.
+2.  you can crate varibles with this formula: var <varible name> = <varible value>.
+    for example var a = 34, var div = 23-5.
+10. you can run code from file like: RUN(<filename>)  for example: RUN("file.yk")
+"""
+HELLO_MSG += "\n\n" + qstiontxt
+
 print(colored(HELLO_MSG, 'cyan', attrs=['bold']))
 while True:
     currentDT = datetime.datetime.now()
     text = input(
         colored(f'{currentDT.day}/{currentDT.month}/{currentDT.year} at {currentDT.hour}:{currentDT.minute} >>> ', 'cyan', attrs=['bold']))
-    result, error = basic.run('<stdin>', text)
+
+    if text.replace(' ', '') == "":
+        continue
+    elif text.strip() == '?':
+        print(colored(qstiontxt, 'yellow'))
+        continue
+    elif text.lower() in ['q', 'quit', 'e', 'exit', 'bye']:
+        try:
+            os.system("clear")  # Linux - OSX
+        except:
+            os.system("cls")  # Windows
+        exit()
+
+    # result, error = basic.run('<stdin>', text) #================================================================
+    result, error = d.run('<stdin>', text)
 
     if error:
         print(colored(error.as_string(), 'red'))
-    else:
-        if(result != ''):
-            print(colored(result, 'green'))
+    elif result:
+        if len(result.elements) == 1:
+            print(colored(repr(result.elements[0]), 'green'))
+        else:
+            print(colored(repr(result), 'green'))
