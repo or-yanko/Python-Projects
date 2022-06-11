@@ -1,3 +1,5 @@
+
+# todo : problens with saving the staff
 import requests
 import time
 
