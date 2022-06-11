@@ -1,4 +1,3 @@
-# files after part 2
 import requests
 import time
 
