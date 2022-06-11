@@ -1,7 +1,7 @@
 import requests
-from api_02 import *
+from myapiextention import *
 
-filename = "Natural Language Processing Short.m4a"
+filename = "file1.m4a"
 audio_url = upload(filename)
 
 save_transcript(audio_url, 'file_title')
