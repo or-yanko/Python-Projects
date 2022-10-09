@@ -17,6 +17,7 @@ if __name__ == "__main__":
         parser.add_argument("target", help="Text/Document to translate")
         parser.add_argument(
             "-s", "--source", help="Source language, default is Google Translate's auto detection", default="auto")
+        parser.add_argument("-d", "--destination",
                             help="Destination language, default is English", default="en")
 
         args = parser.parse_args()
