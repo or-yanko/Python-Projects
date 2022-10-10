@@ -1,5 +1,4 @@
 from tkinter import *
-import ctypes
 import re
 import os
 
