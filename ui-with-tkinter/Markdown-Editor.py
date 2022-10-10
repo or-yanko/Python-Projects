@@ -1,6 +1,5 @@
 # Imports
 from tkinter import *
-import ctypes
 import re
 
 root = Tk()
